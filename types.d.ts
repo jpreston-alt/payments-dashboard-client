@@ -32,12 +32,14 @@ export interface IFormFieldProps {
   component: "TextField" | "Select";
   type?: string;
   options?: { name: string; value: string }[];
+  required?: boolean;
+  helperText?: string;
 }
 
 export interface IFormFields {
   sender: string;
   receiver: string;
-  amount: string;
-  currency: number;
+  amount: number;
+  currency: string;
   memo: string;
 }

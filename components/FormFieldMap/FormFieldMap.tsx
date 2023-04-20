@@ -5,6 +5,7 @@ import {
   MenuItem,
   InputLabel,
   FormControl,
+  FormHelperText,
 } from "@mui/material";
 import { IProps } from "./FormFieldMap.d";
 
@@ -15,6 +16,8 @@ const FormFieldMap = ({
   options,
   value,
   handleOnChange,
+  error,
+  helperText = "This field is required",
 }: IProps) => {
   const renderField = {
     TextField: (
@@ -27,6 +30,8 @@ const FormFieldMap = ({
         variant="filled"
         value={value}
         onChange={handleOnChange}
+        error={error}
+        helperText={error && helperText}
       />
     ),
     Select: (
@@ -39,6 +44,7 @@ const FormFieldMap = ({
           placeholder={name}
           value={value}
           onChange={handleOnChange}
+          error={error}
         >
           {options?.map((option) => (
             <MenuItem
@@ -49,6 +55,7 @@ const FormFieldMap = ({
             </MenuItem>
           ))}
         </Select>
+        <FormHelperText error={error}>{error && helperText}</FormHelperText>
       </FormControl>
     ),
   };

@@ -7,4 +7,5 @@ export interface IProps extends IFormFieldProps {
       | React.ChangeEvent<HTMLInputElement>
       | SelectChangeEvent<string | number>
   ) => void;
+  error: boolean;
 }

@@ -1,33 +1,47 @@
 import { useState } from "react";
 import { Button, Box } from "@mui/material";
-import { IProps, IFormState } from "./Form.d";
+import { IProps } from "./Form.d";
 import { FormFieldMap } from "@/components";
 import { formFieldName, IFormFieldProps, IFormFields } from "@/types";
+import { validateFormFields } from "@/utils/validateFormFields";
 
 const Form = ({ handleSubmit, handleClose, fields }: IProps) => {
-  // TODO can we use refs here instead of state
+  const [errors, setErrors] = useState<string[]>([]);
+  // TODO use refs instead of state
   const [formState, setFormState] = useState<IFormFields>({
     sender: "",
     receiver: "",
-    amount: "",
-    currency: 0,
+    amount: 0,
+    currency: "",
     memo: "",
   });
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setErrors([]);
     const { name, value } = event.target;
     setFormState({ ...formState, [name]: value });
   };
 
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const { isValid, errors } = validateFormFields({ fields, formState });
+    if (isValid) {
+      handleSubmit(formState);
+    } else {
+      setErrors(errors);
+    }
+  };
+
   return (
-    <Box minWidth="500px">
-      <form onSubmit={() => handleSubmit(formState)}>
+    <Box minWidth={500}>
+      <form onSubmit={onSubmit}>
         {fields.map((field: IFormFieldProps) => (
           <Box mb={1} key={`form-field-${field.name}`}>
             <FormFieldMap
               {...field}
               value={formState[field.name as formFieldName]}
               handleOnChange={handleOnChange}
+              error={(errors as string[]).includes(field.name)}
             />
           </Box>
         ))}

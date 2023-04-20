@@ -4,7 +4,7 @@ import { Table, PaymentModal } from "@/components";
 import { useGetPayments, useFilterPayments } from "@/hooks";
 import { columns } from "@/constants/payment-columns";
 import { useStyles } from "@/styles/customClasses.styles";
-import { IFormFields, IUser } from "@/types";
+import { IUser } from "@/types";
 
 interface IProps {
   users: IUser[];
@@ -13,13 +13,12 @@ interface IProps {
 const Payments = ({ users }: IProps) => {
   const styles = useStyles();
   const [showPaymentModal, setShowPaymentModal] = useState(false);
-  const payments = useGetPayments();
+  const { payments, handlePostPayments } = useGetPayments();
   const { filteredPayments, searchValue, handleOnSearch } = useFilterPayments({
     payments,
   });
 
   const togglePaymentModal = () => setShowPaymentModal(!showPaymentModal);
-  const handleSubmit = (formVals: IFormFields) => console.log(formVals);
 
   return (
     <>
@@ -27,7 +26,7 @@ const Payments = ({ users }: IProps) => {
         open={showPaymentModal}
         handleClose={togglePaymentModal}
         users={users}
-        handleSubmit={handleSubmit}
+        handleSubmit={handlePostPayments}
       />
       <Box sx={styles.page_container}>
         <Typography variant="h1" gutterBottom textAlign="center">
@@ -52,7 +51,7 @@ const Payments = ({ users }: IProps) => {
 export default Payments;
 
 export const getStaticProps = async () => {
-  const res = await fetch("http://localhost:8080/users");
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users`);
   const { data } = await res.json();
   return {
     props: { title: "Payments", users: data },

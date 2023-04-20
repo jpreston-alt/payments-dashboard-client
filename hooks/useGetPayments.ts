@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { payments } from "@/types";
+import { payments, IFormFields } from "@/types";
 
 const useGetPayments = () => {
   const [payments, setPayments] = useState<payments>([]);
@@ -13,12 +13,16 @@ const useGetPayments = () => {
   }, [payments]);
 
   const handleGetPayments = async () => {
-    const res = await fetch("http://localhost:8080/payments");
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/payments`);
     const resJson = await res.json();
     setPayments((payments) => [...payments, resJson.data]);
   };
 
-  return payments;
+  const handlePostPayments = (formVals: IFormFields) => {
+    console.log(formVals);
+  };
+
+  return { payments, handlePostPayments };
 };
 
 export default useGetPayments;

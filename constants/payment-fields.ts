@@ -11,16 +11,20 @@ export const getFields = (users: IUser[]) => {
       name: "sender",
       component: "Select",
       options: userOptions,
+      required: true,
     },
     {
       name: "receiver",
       component: "Select",
       options: userOptions,
+      required: true,
     },
     {
       name: "amount",
       component: "TextField",
       type: "number",
+      required: true,
+      helperText: "Amount must be a number greater than 0",
     },
     {
       name: "currency",
@@ -32,6 +36,7 @@ export const getFields = (users: IUser[]) => {
         { name: "JPY", value: "JPY" },
         { name: "USD", value: "USD" },
       ],
+      required: true,
     },
     {
       name: "memo",
