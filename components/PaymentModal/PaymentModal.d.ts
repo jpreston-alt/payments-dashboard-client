@@ -6,4 +6,5 @@ export interface IProps {
   handleClose: () => void;
   users: IUser[];
   handleSubmit: (object: any) => void;
+  loading: boolean;
 }

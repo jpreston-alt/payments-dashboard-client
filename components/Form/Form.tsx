@@ -11,7 +11,7 @@ const Form = ({ handleSubmit, handleClose, fields }: IProps) => {
   });
 
   return (
-    <Box minWidth={500}>
+    <Box>
       <form onSubmit={onSubmit}>
         {fields.map((field: IFormFieldProps) => (
           <Box mb={1} key={`form-field-${field.name}`}>

@@ -5,7 +5,7 @@ interface IArgs {
   payments: payments;
 }
 
-// TODO maybe this can be a utilty function instead of a custom hook
+// TODO maybe this can be a utilty function instead of a custom hook?
 const useFilterPayments = ({ payments }: IArgs) => {
   const [searchValue, setSearchValue] = useState("");
 

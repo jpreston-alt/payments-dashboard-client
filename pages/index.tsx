@@ -22,6 +22,10 @@ const Payments = ({ users }: IProps) => {
   });
 
   const togglePaymentModal = () => setShowPaymentModal(!showPaymentModal);
+  const handleSubmit = async (formVals: IFormFields) => {
+    await handlePostPayments(formVals, users);
+    togglePaymentModal();
+  };
 
   return (
     <>
@@ -29,9 +33,7 @@ const Payments = ({ users }: IProps) => {
         open={showPaymentModal}
         handleClose={togglePaymentModal}
         users={users}
-        handleSubmit={(formVals: IFormFields) =>
-          handlePostPayments(formVals, users)
-        }
+        handleSubmit={handleSubmit}
         loading={loading}
       />
       <Box sx={styles.page_container}>

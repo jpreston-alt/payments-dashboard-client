@@ -15,7 +15,7 @@ const useGetPayments = () => {
 
   const handleGetPayments = async () => {
     const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/payments`);
-    setPayments((payments) => [...payments, res.data.data]);
+    setPayments((payments) => [res.data.data, ...payments]);
   };
 
   return { payments };
