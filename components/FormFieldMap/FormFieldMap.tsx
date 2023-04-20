@@ -30,6 +30,7 @@ const FormFieldMap = ({
       />
     ),
     Select: (
+      // TODO make select it's own component
       <FormControl variant="filled" fullWidth>
         <InputLabel>{name}</InputLabel>
         <Select

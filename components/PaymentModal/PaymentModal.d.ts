@@ -5,4 +5,5 @@ export interface IProps {
   open: boolean;
   handleClose: () => void;
   users: IUser[];
+  handleSubmit: (object: any) => void;
 }

@@ -19,3 +19,25 @@ export interface User {
   name: string;
   id: number;
 }
+
+export type formFieldName =
+  | "sender"
+  | "receiver"
+  | "amount"
+  | "currency"
+  | "memo";
+
+export interface IFormFieldProps {
+  name: formFieldName;
+  component: "TextField" | "Select";
+  type?: string;
+  options?: { name: string; value: string }[];
+}
+
+export interface IFormFields {
+  sender: string;
+  receiver: string;
+  amount: string;
+  currency: number;
+  memo: string;
+}

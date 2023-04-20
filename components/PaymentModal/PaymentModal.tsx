@@ -2,6 +2,8 @@ import React from "react";
 import { Dialog, DialogTitle, DialogContent } from "@mui/material";
 import { Form } from "@/components";
 import { IProps } from "./PaymentModal.d";
+import { getFields } from "@/constants/payment-fields";
+import { IFormFieldProps } from "@/types";
 
 const PaymentModal = ({ handleClose, open, users, handleSubmit }: IProps) => {
   return (
@@ -12,6 +14,7 @@ const PaymentModal = ({ handleClose, open, users, handleSubmit }: IProps) => {
           users={users}
           handleSubmit={handleSubmit}
           handleClose={handleClose}
+          fields={getFields(users) as IFormFieldProps[]}
         />
       </DialogContent>
     </Dialog>

@@ -1,74 +1,32 @@
 import { useState } from "react";
-import { IUser } from "@/types";
 import { Button, Box } from "@mui/material";
-import { IProps } from "./Form.d";
+import { IProps, IFormState } from "./Form.d";
 import { FormFieldMap } from "@/components";
+import { formFieldName, IFormFieldProps, IFormFields } from "@/types";
 
-const getFields = (users: IUser[]) => {
-  const userOptions = users.map((user) => ({
-    name: user.name,
-    value: user.id,
-  }));
-
-  const fields = [
-    {
-      name: "sender",
-      component: "Select",
-      options: userOptions,
-    },
-    {
-      name: "receiver",
-      component: "Select",
-      options: userOptions,
-    },
-    {
-      name: "amount",
-      component: "TextField",
-      type: "number",
-    },
-    {
-      name: "currency",
-      component: "Select",
-      options: [
-        { name: "BTC", value: "BTC" },
-        { name: "GBP", value: "GBP" },
-        { name: "EUR", value: "EUR" },
-        { name: "JPY", value: "JPY" },
-        { name: "USD", value: "USD" },
-      ],
-    },
-    {
-      name: "memo",
-      component: "TextField",
-    },
-  ] as IFormFieldProps[];
-
-  return fields;
-};
-
-const Form = ({ users, handleSubmit, handleClose }: IProps) => {
-  const fields = getFields(users);
-  const [formState, setFormState] = useState({
+const Form = ({ handleSubmit, handleClose, fields }: IProps) => {
+  // TODO can we use refs here instead of state
+  const [formState, setFormState] = useState<IFormFields>({
     sender: "",
     receiver: "",
     amount: "",
-    currency: "",
+    currency: 0,
     memo: "",
   });
 
-  const handleOnChange = (event) => {
+  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormState({ ...formState, [name]: value });
   };
 
   return (
     <Box minWidth="500px">
-      <form>
-        {fields.map((field) => (
+      <form onSubmit={() => handleSubmit(formState)}>
+        {fields.map((field: IFormFieldProps) => (
           <Box mb={1} key={`form-field-${field.name}`}>
             <FormFieldMap
               {...field}
-              value={formState[field.name]}
+              value={formState[field.name as formFieldName]}
               handleOnChange={handleOnChange}
             />
           </Box>
@@ -76,7 +34,7 @@ const Form = ({ users, handleSubmit, handleClose }: IProps) => {
         <Button onClick={handleClose} variant="outlined">
           Cancel
         </Button>
-        <Button onClick={() => handleSubmit(formState)} variant="contained">
+        <Button variant="contained" type="submit">
           Submit
         </Button>
       </form>

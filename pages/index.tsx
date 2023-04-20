@@ -4,7 +4,7 @@ import { Table, PaymentModal } from "@/components";
 import { useGetPayments, useFilterPayments } from "@/hooks";
 import { columns } from "@/constants/payment-columns";
 import { useStyles } from "@/styles/customClasses.styles";
-import { IUser } from "@/types";
+import { IFormFields, IUser } from "@/types";
 
 interface IProps {
   users: IUser[];
@@ -19,7 +19,7 @@ const Payments = ({ users }: IProps) => {
   });
 
   const togglePaymentModal = () => setShowPaymentModal(!showPaymentModal);
-  const handleSubmit = (formVals) => console.log(formVals);
+  const handleSubmit = (formVals: IFormFields) => console.log(formVals);
 
   return (
     <>
