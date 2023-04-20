@@ -1,7 +1,7 @@
 import { Button, Box } from "@mui/material";
 import { IProps } from "./Form.d";
 import { FormFieldMap } from "@/components";
-import { formFieldName, IFormFieldProps } from "@/types";
+import { formFieldName, IError, IFormFieldProps } from "@/types";
 import { useForm } from "@/hooks";
 
 const Form = ({ handleSubmit, handleClose, fields }: IProps) => {
@@ -17,9 +17,9 @@ const Form = ({ handleSubmit, handleClose, fields }: IProps) => {
           <Box mb={1} key={`form-field-${field.name}`}>
             <FormFieldMap
               {...field}
-              value={formState[field.name as formFieldName]}
+              value={formState[field.name as formFieldName] as string | number}
               handleOnChange={handleOnChange}
-              error={(errors as string[]).includes(field.name)}
+              error={errors.find((e: IError) => e.name === field.name)}
             />
           </Box>
         ))}

@@ -8,12 +8,12 @@ interface IArgs {
 }
 
 const useForm = ({ fields, handleSubmit }: IArgs) => {
-  const [errors, setErrors] = useState<string[]>([]);
+  const [errors, setErrors] = useState<{ name: string; message: string }[]>([]);
   // TODO use refs instead of state
   const [formState, setFormState] = useState<IFormFields>({
     sender: "",
     receiver: "",
-    amount: 0,
+    amount: "",
     currency: "",
     memo: "",
   });
@@ -26,7 +26,8 @@ const useForm = ({ fields, handleSubmit }: IArgs) => {
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const { isValid, errors } = validateFormFields({ fields, formState });
+    let { isValid, errors } = validateFormFields({ fields, formState });
+
     if (isValid) {
       handleSubmit(formState);
     } else {

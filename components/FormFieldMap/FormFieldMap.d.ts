@@ -1,4 +1,4 @@
-import { IFormFieldProps } from "@/types";
+import { IError, IFormFieldProps } from "@/types";
 
 export interface IProps extends IFormFieldProps {
   value: string | number;
@@ -7,5 +7,5 @@ export interface IProps extends IFormFieldProps {
       | React.ChangeEvent<HTMLInputElement>
       | SelectChangeEvent<string | number>
   ) => void;
-  error: boolean;
+  error?: IError;
 }

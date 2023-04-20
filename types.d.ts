@@ -37,9 +37,14 @@ export interface IFormFieldProps {
 }
 
 export interface IFormFields {
-  sender: number;
-  receiver: number;
+  sender: string | number;
+  receiver: string | number;
   amount: string;
   currency: string;
   memo: string;
+}
+
+export interface IError {
+  name: string;
+  message: string;
 }

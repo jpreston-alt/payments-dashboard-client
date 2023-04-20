@@ -17,8 +17,8 @@ const FormFieldMap = ({
   value,
   handleOnChange,
   error,
-  helperText = "This field is required",
 }: IProps) => {
+  const hasError = error ? true : false;
   const renderField = {
     TextField: (
       <TextField
@@ -30,8 +30,8 @@ const FormFieldMap = ({
         variant="filled"
         value={value}
         onChange={handleOnChange}
-        error={error}
-        helperText={error && helperText}
+        error={hasError}
+        helperText={error?.message}
       />
     ),
     Select: (
@@ -44,7 +44,7 @@ const FormFieldMap = ({
           placeholder={name}
           value={value}
           onChange={handleOnChange}
-          error={error}
+          error={hasError}
         >
           {options?.map((option) => (
             <MenuItem
@@ -55,7 +55,7 @@ const FormFieldMap = ({
             </MenuItem>
           ))}
         </Select>
-        <FormHelperText error={error}>{error && helperText}</FormHelperText>
+        <FormHelperText error={hasError}>{error?.message}</FormHelperText>
       </FormControl>
     ),
   };
