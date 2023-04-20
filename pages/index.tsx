@@ -14,8 +14,9 @@ interface IProps {
 const Payments = ({ users }: IProps) => {
   const styles = useStyles();
   const [showPaymentModal, setShowPaymentModal] = useState(false);
-  const { payments } = useGetPayments();
-  const { postedPayments, handlePostPayments } = usePostPayment();
+  const { payments: serverPayments } = useGetPayments();
+  const { postedPayments, handlePostPayments, loading } = usePostPayment();
+  const payments = [...postedPayments, ...serverPayments];
   const { filteredPayments, searchValue, handleOnSearch } = useFilterPayments({
     payments,
   });
@@ -31,6 +32,7 @@ const Payments = ({ users }: IProps) => {
         handleSubmit={(formVals: IFormFields) =>
           handlePostPayments(formVals, users)
         }
+        loading={loading}
       />
       <Box sx={styles.page_container}>
         <Typography variant="h1" gutterBottom textAlign="center">

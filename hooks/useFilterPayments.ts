@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import { payments } from "@/types";
 
 interface IArgs {
   payments: payments;
 }
 
+// TODO maybe this can be a utilty function instead of a custom hook
 const useFilterPayments = ({ payments }: IArgs) => {
-  const [filteredPayments, setFilteredPayments] = useState<payments>([]);
   const [searchValue, setSearchValue] = useState("");
 
   const handleFilterPayments = useCallback(
@@ -41,13 +41,10 @@ const useFilterPayments = ({ payments }: IArgs) => {
     [payments]
   );
 
-  useEffect(() => {
-    const filtered = handleFilterPayments(searchValue);
-    setFilteredPayments(filtered);
-  }, [searchValue, handleFilterPayments]);
-
   const handleOnSearch = (event: React.ChangeEvent<HTMLInputElement>) =>
     setSearchValue(event.target.value);
+
+  const filteredPayments = handleFilterPayments(searchValue);
 
   return { filteredPayments, searchValue, handleOnSearch };
 };

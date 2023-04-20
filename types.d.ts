@@ -39,7 +39,7 @@ export interface IFormFieldProps {
 export interface IFormFields {
   sender: number;
   receiver: number;
-  amount: number;
+  amount: string;
   currency: string;
   memo: string;
 }
