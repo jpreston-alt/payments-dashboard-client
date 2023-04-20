@@ -1,40 +1,35 @@
 import React from "react";
 import {
-  TableContainer,
-  Paper,
   Table as MuiTable,
   TableHead,
   TableRow,
   TableCell,
-  TableBody,
+  Card,
+  CardContent,
+  Box,
+  TableContainer,
 } from "@mui/material";
-import { getDataField } from "@/utils/getDataField";
 import { IProps } from "./Table.d";
+import TableBody from "./ui/TableBody";
 
 const Table = ({ columns, rows }: IProps) => {
   return (
-    <TableContainer sx={{ maxHeight: "60vh" }}>
-      <MuiTable stickyHeader>
-        <TableHead>
-          <TableRow>
-            {columns.map((c) => (
-              <TableCell key={`columns-${c.name}`}>{c.name}</TableCell>
-            ))}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((r) => (
-            <TableRow key={`row-${r.id}`}>
-              {columns.map((c) => (
-                <TableCell key={`cell-${r.id}-${c.accessor}`}>
-                  {getDataField(r, c.accessor)}
-                </TableCell>
-              ))}
-            </TableRow>
-          ))}
-        </TableBody>
-      </MuiTable>
-    </TableContainer>
+    <Box component={Card} mt={4}>
+      <CardContent>
+        <TableContainer sx={{ height: "65vh" }}>
+          <MuiTable stickyHeader>
+            <TableHead>
+              <TableRow>
+                {columns.map((c) => (
+                  <TableCell key={`columns-${c.name}`}>{c.name}</TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody rows={rows} columns={columns} />
+          </MuiTable>
+        </TableContainer>
+      </CardContent>
+    </Box>
   );
 };
 

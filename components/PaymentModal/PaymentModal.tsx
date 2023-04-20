@@ -20,7 +20,9 @@ const PaymentModal = ({
   // TODO add a success message on successful post payment
   return (
     <Dialog open={open} onClose={handleClose} fullWidth>
-      <DialogTitle>Create Payment</DialogTitle>
+      <DialogTitle align="center" fontWeight={600}>
+        Create Payment
+      </DialogTitle>
       <DialogContent>
         {loading ? (
           <CircularProgress />

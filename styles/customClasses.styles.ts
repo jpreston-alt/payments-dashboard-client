@@ -6,12 +6,17 @@ export const useStyles = () => {
   const styles = {
     page_container: {
       maxWidth: theme.breakpoints.values.lg,
-      margin: `${theme.spacing(8)} auto`,
+      margin: "auto",
+      padding: theme.spacing(8),
     },
     flex_row: {
       display: "flex",
       justifyContent: "space-between",
       alignItems: "center",
+    },
+    main: {
+      backgroundColor: theme.palette.common.white,
+      minHeight: "100vh",
     },
   };
 

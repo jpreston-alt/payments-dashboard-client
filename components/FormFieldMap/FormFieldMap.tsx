@@ -32,6 +32,7 @@ const FormFieldMap = ({
         onChange={handleOnChange}
         error={hasError}
         helperText={error?.message}
+        InputProps={{ disableUnderline: true }}
       />
     ),
     Select: (
@@ -45,6 +46,7 @@ const FormFieldMap = ({
           value={value}
           onChange={handleOnChange}
           error={hasError}
+          disableUnderline
         >
           {options?.map((option) => (
             <MenuItem

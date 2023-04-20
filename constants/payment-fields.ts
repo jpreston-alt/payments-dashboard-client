@@ -12,12 +12,14 @@ export const getFields = (users: IUser[]) => {
       component: "Select",
       options: userOptions,
       required: true,
+      placeholder: "Sender",
     },
     {
       name: "receiver",
       component: "Select",
       options: userOptions,
       required: true,
+      placeholder: "Receiver",
     },
     {
       name: "amount",
@@ -25,6 +27,7 @@ export const getFields = (users: IUser[]) => {
       type: "number",
       required: true,
       helperText: "Amount must be a number greater than 0",
+      placeholder: "Amount",
     },
     {
       name: "currency",
@@ -37,10 +40,12 @@ export const getFields = (users: IUser[]) => {
         { name: "USD", value: "USD" },
       ],
       required: true,
+      placeholder: "Currency",
     },
     {
       name: "memo",
       component: "TextField",
+      placeholder: "Memo",
     },
   ];
 

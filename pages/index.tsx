@@ -1,7 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
-import { Typography, Box, Button, TextField } from "@mui/material";
-import { Table, PaymentModal } from "@/components";
+import { Typography, Box, IconButton, Tooltip } from "@mui/material";
+import AddRoundedIcon from "@mui/icons-material/AddRounded";
+import { Table, PaymentModal, SearchBar } from "@/components";
 import { useGetPayments, useFilterPayments, usePostPayment } from "@/hooks";
 import { columns } from "@/constants/payment-columns";
 import { useStyles } from "@/styles/customClasses.styles";
@@ -28,7 +29,7 @@ const Payments = ({ users }: IProps) => {
   };
 
   return (
-    <>
+    <main style={styles.main}>
       <PaymentModal
         open={showPaymentModal}
         handleClose={togglePaymentModal}
@@ -38,21 +39,22 @@ const Payments = ({ users }: IProps) => {
       />
       <Box sx={styles.page_container}>
         <Typography variant="h1" gutterBottom textAlign="center">
-          Payments Dashboard
+          Payment Dashboard
         </Typography>
         <Box sx={styles.flex_row}>
-          <TextField
-            placeholder="Search Payments"
-            onChange={handleOnSearch}
-            value={searchValue}
+          <SearchBar
+            handleOnSearch={handleOnSearch}
+            searchValue={searchValue}
           />
-          <Button variant="contained" onClick={togglePaymentModal}>
-            Create Payment
-          </Button>
+          <Tooltip title="Create Payment" placement="left-start">
+            <IconButton onClick={togglePaymentModal}>
+              <AddRoundedIcon fontSize="large" />
+            </IconButton>
+          </Tooltip>
         </Box>
         <Table columns={columns} rows={filteredPayments} />
       </Box>
-    </>
+    </main>
   );
 };
 

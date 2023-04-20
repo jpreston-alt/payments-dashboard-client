@@ -23,12 +23,14 @@ const Form = ({ handleSubmit, handleClose, fields }: IProps) => {
             />
           </Box>
         ))}
-        <Button onClick={handleClose} variant="outlined">
-          Cancel
-        </Button>
-        <Button variant="contained" type="submit">
-          Submit
-        </Button>
+        <Box display="flex" justifyContent="center" mt={2}>
+          <Button onClick={handleClose} variant="outlined">
+            Cancel
+          </Button>
+          <Button variant="contained" type="submit">
+            Submit
+          </Button>
+        </Box>
       </form>
     </Box>
   );

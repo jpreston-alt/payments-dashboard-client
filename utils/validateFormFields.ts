@@ -19,6 +19,7 @@ export const validateFormFields = ({ fields, formState }: IArgs) => {
     }
 
     if (formState.sender && formState.sender === formState.receiver) {
+      isValid = false;
       const message = "Receiver and sender must be different";
       errors.push({ name: "receiver", message });
       errors.push({ name: "sender", message });
