@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IFormFieldProps, IFormFields } from "@/types";
+import { IFormFieldProps, IFormFields, IUser } from "@/types";
 import { validateFormFields } from "@/utils/validateFormFields";
 
 interface IArgs {
@@ -35,7 +35,12 @@ const useForm = ({ fields, handleSubmit }: IArgs) => {
     }
   };
 
-  return { onSubmit, formState, handleOnChange, errors };
+  return {
+    onSubmit,
+    formState,
+    handleOnChange,
+    errors,
+  };
 };
 
 export default useForm;

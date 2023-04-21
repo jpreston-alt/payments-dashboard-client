@@ -1,12 +1,21 @@
 import { useState } from "react";
 import axios from "axios";
-import { payments, IFormFields, IUser } from "@/types";
+import { IFormFields, IUser } from "@/types";
 
-const usePostPayment = () => {
-  const [postedPayments, setPostedPayments] = useState<payments>([]);
+interface IArgs {
+  handleUpdatePayments: (object: any) => void;
+  handleClose: () => void;
+  users: IUser[];
+}
+
+const usePostPayments = ({
+  handleUpdatePayments,
+  handleClose,
+  users,
+}: IArgs) => {
   const [loading, setLoading] = useState(false);
 
-  const handlePostPayments = async (formVals: IFormFields, users: IUser[]) => {
+  const handlePostPayments = async (formVals: IFormFields) => {
     setLoading(true);
     const { amount, currency, memo, receiver, sender } = formVals;
     const payload = {
@@ -22,13 +31,17 @@ const usePostPayment = () => {
     try {
       await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/payments`, payload);
       setLoading(false);
-      setPostedPayments((postedPayments) => [payload, ...postedPayments]);
+      handleUpdatePayments(payload);
+      handleClose();
     } catch (e) {
-      handlePostPayments(formVals, users);
+      handlePostPayments(formVals);
     }
   };
 
-  return { postedPayments, handlePostPayments, loading };
+  return {
+    loading,
+    handlePostPayments,
+  };
 };
 
-export default usePostPayment;
+export default usePostPayments;

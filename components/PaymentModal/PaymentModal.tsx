@@ -7,17 +7,22 @@ import {
 } from "@mui/material";
 import { Form } from "@/components";
 import { IProps } from "./PaymentModal.d";
-import { getFields } from "@/constants/payment-fields";
+import { getFields } from "@/constants/payment-form-fields";
 import { IFormFieldProps } from "@/types";
+import { usePostPayments } from "@/hooks";
 
 const PaymentModal = ({
   handleClose,
   open,
   users,
-  handleSubmit,
-  loading,
+  handleUpdatePayments,
 }: IProps) => {
-  // TODO add a success message on successful post payment
+  const { loading, handlePostPayments } = usePostPayments({
+    handleUpdatePayments,
+    handleClose,
+    users,
+  });
+
   return (
     <Dialog open={open} onClose={handleClose} fullWidth>
       <DialogTitle align="center" fontWeight={600}>
@@ -28,10 +33,9 @@ const PaymentModal = ({
           <CircularProgress />
         ) : (
           <Form
-            users={users}
-            handleSubmit={handleSubmit}
             handleClose={handleClose}
             fields={getFields(users) as IFormFieldProps[]}
+            handleSubmit={handlePostPayments}
           />
         )}
       </DialogContent>
