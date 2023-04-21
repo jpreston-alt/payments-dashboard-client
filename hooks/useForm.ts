@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IFormFieldProps, IFormFields, IUser } from "@/types";
+import { IFormFieldProps, IFormFields } from "@/types";
 import { validateFormFields } from "@/utils/validateFormFields";
 
 interface IArgs {

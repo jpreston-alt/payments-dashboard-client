@@ -3,10 +3,10 @@ import axios from "axios";
 import { Typography, Box, IconButton, Tooltip } from "@mui/material";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import { Table, PaymentModal, SearchBar } from "@/components";
-import { usePayments, useFilterPayments, usePostPayment } from "@/hooks";
+import { usePayments, useFilterPayments } from "@/hooks";
 import { columns } from "@/constants/payment-columns";
 import { useStyles } from "@/styles/customClasses.styles";
-import { IFormFields, IUser } from "@/types";
+import { IUser } from "@/types";
 
 interface IProps {
   users: IUser[];
